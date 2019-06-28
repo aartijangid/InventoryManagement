@@ -1,12 +1,13 @@
-package com.rt.bakery.beans;
+package com.rt.bakery.product.beans;
 
 import java.util.ArrayList;
 
-public class ProductNameCode {
+public class ProductNameCode{
+
 	private String productName = "";
 	private String productCode = "";
 	private ArrayList<ProductPackageDetails> packageDetailsArray = null;
-	
+
 	public String getProductName() {
 		return productName;
 	}

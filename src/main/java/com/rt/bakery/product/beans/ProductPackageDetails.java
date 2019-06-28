@@ -1,4 +1,4 @@
-package com.rt.bakery.beans;
+package com.rt.bakery.product.beans;
 
 public class ProductPackageDetails {
 	private int packOf = 0;
