@@ -3,24 +3,22 @@ package com.rt.bakery.order.controllers;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.rt.bakery.order.dto.OrderDTO;
 import com.rt.bakery.order.dto.PackageDTO;
 
-@Controller
+@RestController
 public class OrderController {
-	
+
 	@RequestMapping(value = "/generateMyOrder", method = RequestMethod.GET)
-	@ResponseBody	
 	public OrderDTO generateOrderRequest(
 			@RequestParam(value = "productName", defaultValue = "VS5") String productName,
 			@RequestParam(value = "quantity", defaultValue = "0") int quantity) {
-		
+
 		OrderDTO orderDTO = new OrderDTO();
 		orderDTO.setProductName("VS5");
 		orderDTO.setTotalQuantity(10);
@@ -32,7 +30,7 @@ public class OrderController {
 		packOne.setCostPerPack(8.99);
 		listOfPackage.add(packOne);
 		orderDTO.setPackageDTOList(listOfPackage);
-		
+
 		return orderDTO;
 	}
 
