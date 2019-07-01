@@ -25,7 +25,7 @@ public class OrderProcessor {
 		packages = new ArrayList<Integer>();
 		packageDTOList = new ArrayList<PackageDTO>();
 		DecimalFormat df = new DecimalFormat("#.##");
-		
+
 		ProductNameCode inventoryProductDetails = BakeryInventoryManager.productMap.get(productCode);
 
 		orderDTO.setProductName(productCode);
@@ -46,27 +46,31 @@ public class OrderProcessor {
 				div = quantity / packages.get(i);
 
 				if(mod == 0) {
-					PackageDTO packageDetails = new PackageDTO();
-					packageDetails.setNoOfPacks((int) div);
-					packageDetails.setPackOf(packages.get(i));
-					packageDetails.setCostPerPack(packageMap.get(packages.get(i)));
-					packageDTOList.add(packageDetails);
+					packageDTOList.add(addPack((int)div, packages.get(i), packageMap.get(packages.get(i))));
 					totalCost = totalCost + (div * packageMap.get(packages.get(i)));
 					break;
-				} else if((mod / packages.get(i+1) > 0) || (div <= 0 && (mod / packages.get(i+1)) > 0)) {
-					PackageDTO packageDetails = new PackageDTO();
-					packageDetails.setNoOfPacks((int) div);
-					packageDetails.setPackOf(packages.get(i));
-					packageDetails.setCostPerPack(packageMap.get(packages.get(i)));
-					packageDTOList.add(packageDetails);
-					totalCost = totalCost + (div * packageMap.get(packages.get(i)));
-					quantity = mod;
+				} else if(i != packages.size()-1) {
+					if((mod / packages.get(i+1) > 0) || (div <= 0 && (mod / packages.get(i+1)) > 0)) {
+						packageDTOList.add(addPack((int)div, packages.get(i), packageMap.get(packages.get(i))));
+						totalCost = totalCost + (div * packageMap.get(packages.get(i)));
+						quantity = mod;
+					}
 				}
 			}
 		}
+		if(mod == 0) {
+			orderDTO.setTotalCost(df.format(totalCost));
+			orderDTO.setPackageDTOList(packageDTOList);
+			return orderDTO;
+		}else
+			throw new RuntimeException("Order can not be processed!");
+	}
 
-		orderDTO.setTotalCost(df.format(totalCost));
-		orderDTO.setPackageDTOList(packageDTOList);
-		return orderDTO;
+	private PackageDTO addPack(int noOfPack, Integer packOf, Double costPerPack) {
+		PackageDTO packageDetails = new PackageDTO();
+		packageDetails.setNoOfPacks(noOfPack);
+		packageDetails.setPackOf(packOf);
+		packageDetails.setCostPerPack(costPerPack);
+		return packageDetails;
 	}
 }

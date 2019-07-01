@@ -2,6 +2,7 @@ package com.rt.bakery.order.processor;
 
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,6 +15,7 @@ import com.rt.bakery.order.dto.OrderDTO;
 import com.rt.bakery.order.dto.PackageDTO;
 
 public class OrderProcessorTest {
+	
 	@Test
 	public void givenProductCodeVS5AndQuantiy10ShouldReturnOrderDetail() throws JsonProcessingException {
 		// Given
@@ -75,8 +77,9 @@ public class OrderProcessorTest {
 				objectMapper.writeValueAsString(orderProcessor.processOrder(productCode, quantity))
 				);
 	}
+	
 	@Test
-	public void givenProductCodeCDAndQuantiy13ShouldReturnOrderDetail() throws JsonProcessingException {
+	public void givenProductCodeCFAndQuantiy13ShouldReturnOrderDetail() throws JsonProcessingException {
 		// Given
 		String productCode = "CF";
 		int quantity = 13;
@@ -108,5 +111,21 @@ public class OrderProcessorTest {
 				objectMapper.writeValueAsString(orderProcessor.processOrder(productCode, quantity))
 				);
 
+	}
+	
+	@Test
+	public void givenProductCodeCFAndQuantiy19ShouldThrowException() {
+		// Given
+		String productCode = "CF";
+		int quantity = 19;
+		OrderProcessor orderProcessor = new OrderProcessor();
+
+		// Then
+		try {
+			orderProcessor.processOrder(productCode, quantity);
+			fail("Expected to throw exception!");
+		}catch(RuntimeException runtimeException){
+			assert(true);
+		}
 	}
 }
