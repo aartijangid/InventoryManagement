@@ -1,7 +1,7 @@
 package com.rt.bakery.order.processor;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -24,7 +24,8 @@ public class OrderProcessor {
 		packageMap = new HashMap<Integer, Double>();
 		packages = new ArrayList<Integer>();
 		packageDTOList = new ArrayList<PackageDTO>();
-
+		DecimalFormat df = new DecimalFormat("#.##");
+		
 		ProductNameCode inventoryProductDetails = BakeryInventoryManager.productMap.get(productCode);
 
 		orderDTO.setProductName(productCode);
@@ -40,10 +41,10 @@ public class OrderProcessor {
 		Collections.sort(packages, Collections.reverseOrder());
 
 		for(int i=0; i < packages.size(); i++) {
-			if(packages.get(i) < quantity) {
+			if(packages.get(i) <= quantity) {
 				mod = quantity % packages.get(i);
 				div = quantity / packages.get(i);
-				
+
 				if(mod == 0) {
 					PackageDTO packageDetails = new PackageDTO();
 					packageDetails.setNoOfPacks((int) div);
@@ -52,8 +53,7 @@ public class OrderProcessor {
 					packageDTOList.add(packageDetails);
 					totalCost = totalCost + (div * packageMap.get(packages.get(i)));
 					break;
-				}
-				else if((mod != 0 && (mod / packages.get(i+1)) > 0) || (div <= 0 && (mod / packages.get(i+1)) > 0)) {
+				} else if((mod / packages.get(i+1) > 0) || (div <= 0 && (mod / packages.get(i+1)) > 0)) {
 					PackageDTO packageDetails = new PackageDTO();
 					packageDetails.setNoOfPacks((int) div);
 					packageDetails.setPackOf(packages.get(i));
@@ -63,10 +63,9 @@ public class OrderProcessor {
 					quantity = mod;
 				}
 			}
-			
 		}
 
-		orderDTO.setTotalCost(totalCost);
+		orderDTO.setTotalCost(df.format(totalCost));
 		orderDTO.setPackageDTOList(packageDTOList);
 		return orderDTO;
 	}

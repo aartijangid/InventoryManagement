@@ -26,7 +26,7 @@ public class OrderProcessorTest {
 		// When
 		expectedOrderDTO.setProductName("VS5");
 		expectedOrderDTO.setTotalQuantity(10);
-		expectedOrderDTO.setTotalCost(17.98);
+		expectedOrderDTO.setTotalCost("17.98");
 		List<PackageDTO> listOfPackage = new ArrayList<PackageDTO>();
 		PackageDTO packOne = new PackageDTO();
 		packOne.setNoOfPacks(2);
@@ -54,7 +54,7 @@ public class OrderProcessorTest {
 		// When
 		expectedOrderDTO.setProductName("MB11");
 		expectedOrderDTO.setTotalQuantity(14);
-		expectedOrderDTO.setTotalCost(54.8);
+		expectedOrderDTO.setTotalCost("54.8");
 		List<PackageDTO> listOfPackage = new ArrayList<PackageDTO>();
 		PackageDTO packOne = new PackageDTO();
 		packOne.setNoOfPacks(1);
@@ -74,5 +74,39 @@ public class OrderProcessorTest {
 				objectMapper.writeValueAsString(expectedOrderDTO),
 				objectMapper.writeValueAsString(orderProcessor.processOrder(productCode, quantity))
 				);
+	}
+	@Test
+	public void givenProductCodeCDAndQuantiy13ShouldReturnOrderDetail() throws JsonProcessingException {
+		// Given
+		String productCode = "CF";
+		int quantity = 13;
+		OrderProcessor orderProcessor = new OrderProcessor();
+		OrderDTO expectedOrderDTO = new OrderDTO();
+		ObjectMapper objectMapper = new ObjectMapper();
+
+		// When
+		expectedOrderDTO.setProductName("CF");
+		expectedOrderDTO.setTotalQuantity(13);
+		expectedOrderDTO.setTotalCost("25.85");
+		List<PackageDTO> listOfPackage = new ArrayList<PackageDTO>();
+		PackageDTO packOne = new PackageDTO();
+		packOne.setNoOfPacks(2);
+		packOne.setPackOf(5);
+		packOne.setCostPerPack(9.95);
+		listOfPackage.add(packOne);
+		PackageDTO packTwo = new PackageDTO();
+		packTwo.setNoOfPacks(1);
+		packTwo.setPackOf(3);
+		packTwo.setCostPerPack(5.95);
+		listOfPackage.add(packTwo);
+
+		expectedOrderDTO.setPackageDTOList(listOfPackage);
+
+		// Then
+		assertEquals(
+				objectMapper.writeValueAsString(expectedOrderDTO),
+				objectMapper.writeValueAsString(orderProcessor.processOrder(productCode, quantity))
+				);
+
 	}
 }

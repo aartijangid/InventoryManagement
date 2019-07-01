@@ -30,7 +30,7 @@ public class BakeryInventoryManagerTest {
 		ProductNameCode croissant = BakeryInventoryManager.productMap.get("CF");
 		assertTrue("Tree Packs of Croissant not available in Bakery", croissant.getPackageDetailsArray().size() == 3);
 	}
-
+	
 	@Test
 	public void testIfWheatBreadIsNotAvailableInBakery() {
 		ProductNameCode wheatBread;

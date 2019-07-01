@@ -42,41 +42,39 @@ public class OrderControllerTest {
 	@Test
 	public void when_Order10VegemitteScroll_then_ShouldGetBestPackageAlongWithCost() throws Exception {
 		// given - I am hungry and see a bakery
-		String orderURL = "/generateMyOrder?productName=VS5&quantity=10";
+		String orderURL = "/generateMyOrder?productCode=VS5&quantity=10";
 
 		// when - I will order 10 vegemitte scroll
 		ResultActions result = mockMVC.perform(get(orderURL));
 
 		// then - I should get best packaging along with cost details 
-
 		String expectedResponse = "{\"productName\":\"VS5\","
-				+ "\"totalQuantity\":10,"
-				+ "\"totalCost\":17.98,"
+				+ "\"totalQuantity\":10,\"totalCost\":\"17.98\","
 				+ "\"packageDTOList\":[{\"noOfPacks\":2,\"packOf\":5,\"costPerPack\":8.99}]}";
 
 		result.andExpect(status().isOk())
 		.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
 		.andExpect(content().json(expectedResponse));
 	}
-	
+
 	@Test
 	public void when_Order5Croissant_then_ShouldGetBestPackageAlongWithCost() throws Exception {
 		// given
-		String orderURL = "/generateMyOrder?productName=CF&quantity=5";
+		String orderURL = "/generateMyOrder?productCode=CF&quantity=13";
 
 		// when
 		ResultActions result = mockMVC.perform(get(orderURL));
 
 		// then 
-
 		String expectedResponse = "{\"productName\":\"CF\","
-				+ "\"totalQuantity\":5,"
-				+ "\"totalCost\":9.95,"
-				+ "\"packageDTOList\":[{\"noOfPacks\":1,\"packOf\":5,\"costPerPack\":9.95}]}";
+				+ "\"totalQuantity\":13,"
+				+ "\"totalCost\":\"25.85\","
+				+ "\"packageDTOList\":[{\"noOfPacks\":2,\"packOf\":5,\"costPerPack\":9.95},"
+				+ "{\"noOfPacks\":1,\"packOf\":3,\"costPerPack\":5.95}]}";
 
 		result.andExpect(status().isOk())
 		.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
 		.andExpect(content().json(expectedResponse));
 	}
-	
+
 }

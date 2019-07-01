@@ -22,5 +22,5 @@ public class PackageDTO {
 	public void setCostPerPack(double costPerPack) {
 		this.costPerPack = costPerPack;
 	}
-	
+
 }

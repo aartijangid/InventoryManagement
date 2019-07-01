@@ -5,7 +5,7 @@ import java.util.List;
 public class OrderDTO {
 	private String productName = "";
 	private int totalQuantity = 0;
-	private Double totalCost = 0.0;
+	private String totalCost = "";
 	private List<PackageDTO> packageDTOList = null;
 	public List<PackageDTO> getPackageDTOList() {
 		return packageDTOList;
@@ -25,12 +25,11 @@ public class OrderDTO {
 	public void setTotalQuantity(int totalQuantity) {
 		this.totalQuantity = totalQuantity;
 	}
-	public Double getTotalCost() {
+	public String getTotalCost() {
 		return totalCost;
 	}
-	public void setTotalCost(Double totalCost) {
-		this.totalCost = totalCost;
+	public void setTotalCost(String string) {
+		this.totalCost = string;
 	}
-	
-	
+
 }
