@@ -1,10 +1,12 @@
 package com.rt.bakery.order.processor;
 
 import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 
 import com.rt.bakery.inventory.BakeryInventoryManager;
 import com.rt.bakery.order.dto.OrderDTO;
@@ -24,7 +26,8 @@ public class OrderProcessor {
 		packageMap = new HashMap<Integer, Double>();
 		packages = new ArrayList<Integer>();
 		packageDTOList = new ArrayList<PackageDTO>();
-		DecimalFormat df = new DecimalFormat("#.##");
+		DecimalFormatSymbols symbols = new DecimalFormatSymbols(Locale.US);
+		DecimalFormat df = new DecimalFormat("$ #.##", symbols);
 
 		ProductNameCode inventoryProductDetails = BakeryInventoryManager.productMap.get(productCode);
 

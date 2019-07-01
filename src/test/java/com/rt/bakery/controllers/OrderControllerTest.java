@@ -49,7 +49,7 @@ public class OrderControllerTest {
 
 		// then - I should get best packaging along with cost details 
 		String expectedResponse = "{\"productName\":\"VS5\","
-				+ "\"totalQuantity\":10,\"totalCost\":\"17.98\","
+				+ "\"totalQuantity\":10,\"totalCost\":\"$ 17.98\","
 				+ "\"packageDTOList\":[{\"noOfPacks\":2,\"packOf\":5,\"costPerPack\":8.99}]}";
 
 		result.andExpect(status().isOk())
@@ -68,7 +68,7 @@ public class OrderControllerTest {
 		// then 
 		String expectedResponse = "{\"productName\":\"CF\","
 				+ "\"totalQuantity\":13,"
-				+ "\"totalCost\":\"25.85\","
+				+ "\"totalCost\":\"$ 25.85\","
 				+ "\"packageDTOList\":[{\"noOfPacks\":2,\"packOf\":5,\"costPerPack\":9.95},"
 				+ "{\"noOfPacks\":1,\"packOf\":3,\"costPerPack\":5.95}]}";
 

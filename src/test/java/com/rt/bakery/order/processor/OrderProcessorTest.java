@@ -28,7 +28,7 @@ public class OrderProcessorTest {
 		// When
 		expectedOrderDTO.setProductName("VS5");
 		expectedOrderDTO.setTotalQuantity(10);
-		expectedOrderDTO.setTotalCost("17.98");
+		expectedOrderDTO.setTotalCost("$ 17.98");
 		List<PackageDTO> listOfPackage = new ArrayList<PackageDTO>();
 		PackageDTO packOne = new PackageDTO();
 		packOne.setNoOfPacks(2);
@@ -56,7 +56,7 @@ public class OrderProcessorTest {
 		// When
 		expectedOrderDTO.setProductName("MB11");
 		expectedOrderDTO.setTotalQuantity(14);
-		expectedOrderDTO.setTotalCost("54.8");
+		expectedOrderDTO.setTotalCost("$ 54.8");
 		List<PackageDTO> listOfPackage = new ArrayList<PackageDTO>();
 		PackageDTO packOne = new PackageDTO();
 		packOne.setNoOfPacks(1);
@@ -90,7 +90,7 @@ public class OrderProcessorTest {
 		// When
 		expectedOrderDTO.setProductName("CF");
 		expectedOrderDTO.setTotalQuantity(13);
-		expectedOrderDTO.setTotalCost("25.85");
+		expectedOrderDTO.setTotalCost("$ 25.85");
 		List<PackageDTO> listOfPackage = new ArrayList<PackageDTO>();
 		PackageDTO packOne = new PackageDTO();
 		packOne.setNoOfPacks(2);

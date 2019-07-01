@@ -7,5 +7,6 @@
 	`./mvnw clean install`
 
 ## How to run tests?
-
-## ToDo
+1. Ensure to go through "How to install?"
+2. Run test with Maven
+	`./mvnw clean test` 
